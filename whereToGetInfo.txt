@@ -3,11 +3,13 @@ Overall information:
 	- Free RAM:	/proc/meminfo (MemAvailable:)
 	- Total Swap:	/proc/meminfo (SwapTotal:)
 	- Free Swap:	/proc/meminfo (SwapFree:)
-	- Cache memory: ?
+	- Cache memory: /proc/cpuinfo (cache size:)
 
 Process specific:
 	- RAM usage	/proc/[pid]/statm
 		value 2 x pageSize - value 3 x pageSize
 	- Swap usage	/proc/[pid]/status (VmSwap) 
-	- Cache usage	?
-	- Page faults	?
+	- Cache usage	
+	- Page faults	/proc/[pid]/stat
+		Major page faults: (value 12)
+		Minor page faults: (value 10)
