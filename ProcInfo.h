@@ -1,6 +1,8 @@
 #ifndef _PROC_INFO_
 #define _PROC_INFO_
 
+#include <string>
+
 using namespace std;
 
 class ProcInfo{
