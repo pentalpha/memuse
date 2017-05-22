@@ -4,7 +4,10 @@ Overall information:
 	- Total Swap:	/proc/meminfo (SwapTotal:)
 	- Free Swap:	/proc/meminfo (SwapFree:)
 	- Cache memory: ?
+
 Process specific:
-	- RAM usage	?
+	- RAM usage	/proc/[pid]/statm
+		value 2 x pageSize - value 3 x pageSize
+	- Swap usage	/proc/[pid]/status (VmSwap) 
 	- Cache usage	?
 	- Page faults	?
