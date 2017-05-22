@@ -10,12 +10,14 @@ public:
   SysInfo();
 
   void fillInfo();
-protected:
+
   int totalRAM, freeRAM;
   int totalSwap, freeSwap;
   int cacheSize;
 
+protected:
   string meminfoPath, cpuinfoPath;
+  string cacheTag, totalRAMTag, freeRAMTag, totalSwapTag, freeSwapTag;
 };
 
 #endif

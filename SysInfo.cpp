@@ -8,8 +8,10 @@ SysInfo::SysInfo(){
   freeRAMTag = "MemAvailable:";
   totalSwapTag = "SwapTotal:";
   freeSwapTag = "SwapFree:";
+
+  fillInfo();
 }
 
 void SysInfo::fillInfo(){
-  
+
 }

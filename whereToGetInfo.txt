@@ -9,7 +9,7 @@ Process specific:
 	- RAM usage	/proc/[pid]/statm
 		value 2 x pageSize - value 3 x pageSize
 	- Swap usage	/proc/[pid]/status (VmSwap) 
-	- Cache usage	
+	- Cache usage	?	
 	- Page faults	/proc/[pid]/stat
 		Major page faults: (value 12)
 		Minor page faults: (value 10)
