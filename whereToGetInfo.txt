@@ -1,0 +1,10 @@
+Overall information:
+	- Total RAM:	/proc/meminfo (MemTotal:)
+	- Free RAM:	/proc/meminfo (MemAvailable:)
+	- Total Swap:	/proc/meminfo (SwapTotal:)
+	- Free Swap:	/proc/meminfo (SwapFree:)
+	- Cache memory: ?
+Process specific:
+	- RAM usage	?
+	- Cache usage	?
+	- Page faults	?
