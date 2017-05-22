@@ -1,7 +1,9 @@
-#ifndef _SYS_INFO_
-#define _SYS_INFO_
+#ifndef _SYSINFOXX_
+#define _SYSINFOXX_
 
+#include <iostream>
 #include <string>
+#include "Utils.h"
 
 using namespace std;
 
@@ -10,10 +12,11 @@ public:
   SysInfo();
 
   void fillInfo();
+  void print();
 
-  int totalRAM, freeRAM;
-  int totalSwap, freeSwap;
-  int cacheSize;
+  string totalRAM, freeRAM;
+  string totalSwap, freeSwap;
+  string cacheSize;
 
 protected:
   string meminfoPath, cpuinfoPath;

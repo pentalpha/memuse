@@ -5,11 +5,15 @@
 
 int main(int argc, char const *argv[]) {
   SysInfo sysInfo;
-  vector<string> procDirs = getProcDirs();
-  set<string> procInfos;
+  sysInfo.print();
+  /*vector<string> procDirs = getProcDirs();
+  set<ProcInfo> procInfos;
   for(string dir : procDirs){
     ProcInfo procInfo(dir);
     procInfos.add(procInfo);
   }
+  for(ProcInfo info : procInfos){
+    info.print();
+  }*/
   return 0;
 }

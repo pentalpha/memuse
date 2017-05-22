@@ -7,10 +7,10 @@ using namespace std;
 
 class ProcInfo{
 public:
-  ProcInfo(int pid);
   ProcInfo(string procFolder);
 
   void fillInfo();
+  void print();
 protected:
   int memUse;
   int swapUse;
