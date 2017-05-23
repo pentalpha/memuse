@@ -1,7 +1,7 @@
 #include "Utils.h"
 
 string grepLineWith(string path, string contains){
-  string theLine = "not-found";
+  string theLine = "null";
   string tempLine;
   ifstream stream(path);
   while(getline(stream, tempLine)){
@@ -13,20 +13,24 @@ string grepLineWith(string path, string contains){
   return theLine;
 }
 
+int valueXInIntegersFile(string path, int x){
+  string xStr = grepValueXInSequence(path, x);
+  return stringToInt(xStr, false);
+}
+
 string grepValueXInSequence(string path, int x){
-  fstream stream;
-  stream.open(path);
-  int i = 1;
+  ifstream valuesStream(path);
+  //cout << "opening " << path << endl;
+  //valuesStream.open(path);
   string temp, theValue;
-  theValue = "not-found";
-  while (i <= x){
-    if(i == x){
-      stream >> theValue;
-    }else{
-      stream >> temp;
-    }
-    i++;
+  //theValue = "not-found";
+  for(int i = 1; i < x; i++){
+    valuesStream >> temp;
+    //cout << "skiping value: " << temp << endl;
   }
+  valuesStream >> theValue;
+  //cout << "theValue: " << theValue << endl;
+  //valuesStream.close();
   return theValue;
 }
 
@@ -69,7 +73,6 @@ string cleanSpacesAndEtc(string s){
         break;
       }
     }
-    //s.erase(remove(s.begin(), s.end(), chars[i]), s.end());
   }
 
   return s;
@@ -86,11 +89,13 @@ string removeSubstring(string s, string subs){
   return s;
 }
 
-int stringToInt(string s, bool formated = false){
+int stringToInt(string s, bool formated){
   try{
     int x = stoi(s);
   }catch(...){
     if(formated){
+      cout << "[ERROR] Could not convert "
+           << s << " to int;" << endl;
       return -666;
     }else{
       return stringToInt(cleanSpacesAndEtc(s), true);
@@ -103,4 +108,8 @@ string getValueFromLineWithTagRemovingTag(string path, string contains)
   string lineRaw = grepLineWith(path, contains);
   string value = cleanSpacesAndEtc(removeSubstring(lineRaw, contains));
   return value;
+}
+
+int getPageSizeInKB(){
+  return (sysconf(_SC_PAGE_SIZE)/1024);
 }
