@@ -2,6 +2,8 @@
 
 const long ProcInfo::pageSize = getPageSizeInKB();
 const string ProcInfo::swapTag = "VmSwap";
+const string ProcInfo::nameTag = "Name:";
+const string ProcInfo::swapTag2 = "Swap:";
 
 ProcInfo::ProcInfo(string procFolder){
   dir = procFolder;
@@ -9,6 +11,7 @@ ProcInfo::ProcInfo(string procFolder){
   definePaths();
 
   memUse = 0;
+  name = "no-name";
   majorPageFaults = 0;
   minorPageFaults = 0;
 
@@ -16,9 +19,16 @@ ProcInfo::ProcInfo(string procFolder){
 }
 
 void ProcInfo::fillInfo(){
+  name = getValueFromLineWithTagRemovingTag(statusPath,
+                                            nameTag);
+  name = fillWithSpacesIfSmallerThan(name, minNameSize);
   //cout << "Searching for swap usage in " << statusPath << endl;
   swapUse = getValueFromLineWithTagRemovingTag(statusPath,
                                               swapTag);
+  if(swapUse == "none"){
+    swapUse = getValueFromLineWithTagRemovingTag(smapsPath,
+                                                swapTag2);
+  }
   //cout << "swapUse " << swapUse << endl;
   int pages = valueXInIntegersFile(statmPath, pagsIndex);
   //cout << "pages " << pages << endl;
@@ -39,14 +49,18 @@ void ProcInfo::print(){
 }
 
 void ProcInfo::printInLine(){
-  cout << pid << "\t" << ((float)memUse/1024) << "\t\t"
-      << swapUse << "\t\t" << majorPageFaults << "\t\t"
-      <<"\t" << minorPageFaults << endl;
+  cout << pid << "\t" << name << "\t\t"
+      << ((float)memUse/1024) << "\t\t"
+      << swapUse << "\t\t"
+      << majorPageFaults << "\t"
+      << minorPageFaults << endl;
 }
 
 void ProcInfo::printHeader(){
-  cout << "PID\tMEMORY(MB)\tSWAP USE"
-      << "\tMAJOR PG. FAULTS\tMINOR PG. FAULTS" << endl;
+  cout << "MJFLT: Major page faults;" << endl
+      << "MNFLT: Minor page faults;" << endl;
+  cout << "PID\tNAME\t\t\tMEMORY(MB)\tSWAP USE"
+      << "\tMJFLT\tMNFLT" << endl;
 }
 
 void ProcInfo::getIntPidFromFolder(string procFolder){
@@ -63,4 +77,5 @@ void ProcInfo::definePaths(){
   statPath = dir + "/stat";
   statmPath = dir + "/statm";
   statusPath = dir + "/status";
+  smapsPath = dir + "/smaps";
 }

@@ -1,14 +1,16 @@
 #include "Utils.h"
 
 string grepLineWith(string path, string contains){
-  string theLine = "null";
+  string theLine = "none";
   string tempLine;
   ifstream stream(path);
-  while(getline(stream, tempLine)){
+  int i = 0;
+  while(getline(stream, tempLine) && i <= 1000){
     if (tempLine.find(contains) != string::npos) {
       theLine = tempLine;
       break;
     }
+    i++;
   }
   return theLine;
 }
@@ -112,4 +114,14 @@ string getValueFromLineWithTagRemovingTag(string path, string contains)
 
 int getPageSizeInKB(){
   return (sysconf(_SC_PAGE_SIZE)/1024);
+}
+
+string fillWithSpacesIfSmallerThan(string s, int x){
+  int diff = x - s.size();
+  if(diff > 0){
+    for(int i = 1; i <= diff; i++){
+      s = s + " ";
+    }
+  }
+  return s;
 }

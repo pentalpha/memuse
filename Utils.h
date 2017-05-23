@@ -22,4 +22,5 @@ int stringToInt(string s, bool formated);
 string removeSubstring(string s, string subs);
 string getValueFromLineWithTagRemovingTag(string path, string contains);
 int getPageSizeInKB();
+string fillWithSpacesIfSmallerThan(string s, int x);
 #endif
